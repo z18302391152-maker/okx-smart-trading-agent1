@@ -226,5 +226,5 @@ MIT License
 - OKX 开发者文档: https://web3.okx.com/zh-hans/onchainos/dev-docs/home/what-is-onchainos
 
 ---
-
+OKX项目id:03512cdc920abbde9dadf07e3da97b36  钱包地址：0x2004fdf4f6233cba5f2762bde36ba9857ef96ff4
 **注意**: 本项目仅供学习和研究使用，实际交易请谨慎操作，风险自负。

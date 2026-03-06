@@ -4,6 +4,7 @@ Utils module initialization
 """
 
 from .api_client import OKXAPIClient
+from .okx_api_client import OKXOnchainOSClient
 from .helpers import (
     format_usd,
     format_percentage,
@@ -28,6 +29,7 @@ from .helpers import (
 
 __all__ = [
     'OKXAPIClient',
+    'OKXOnchainOSClient',
     'format_usd',
     'format_percentage',
     'format_number',
