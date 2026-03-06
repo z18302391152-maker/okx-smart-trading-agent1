@@ -1,27 +1,30 @@
 """
 OKX Smart Trading Agent - Configuration File
-閰嶇疆鏂囦欢锛氱＄悊 API 瀵嗛挜銆佺綉缁滆剧疆鍜屽叾浠栭厤缃鍙傛暟
+配置文件：管理 API 密钥、网络设置和其他配置参数
 """
 
 import os
 from dotenv import load_dotenv
 
-# 鍔犺浇鐜澧冨彉閲
+# 加载环境变量
 load_dotenv()
 
 class Config:
-    """閰嶇疆绫"""
+    """配置类"""
     
-    # OKX API 閰嶇疆
+    # OKX API 配置
     OKX_API_KEY = os.getenv('OKX_API_KEY', '')
     OKX_API_SECRET = os.getenv('OKX_API_SECRET', '')
     OKX_API_PASSPHRASE = os.getenv('OKX_API_PASSPHRASE', '')
     
-    # API 绔鐐
+    # 钱包私钥配置
+    WALLET_PRIVATE_KEY = os.getenv('WALLET_PRIVATE_KEY', '')
+    
+    # API 端点
     OKX_API_BASE_URL = 'https://www.okx.com'
     OKX_API_PUBLIC_URL = 'https://www.okx.com'
     
-    # 鏀鎸佺殑鍖哄潡閾剧綉缁
+    # 支持的区块链网络
     SUPPORTED_CHAINS = [
         'xlayer',
         'solana',
@@ -46,42 +49,42 @@ class Config:
         'canto'
     ]
     
-    # 榛樿ら厤缃
+    # 默认配置
     DEFAULT_CHAIN = 'ethereum'
-    DEFAULT_SLIPPAGE = 0.5  # 榛樿ゆ粦鐐 0.5%
+    DEFAULT_SLIPPAGE = 0.5  # 默认滑点 0.5%
     DEFAULT_GAS_PRICE = 'medium'  # low, medium, high
     
-    # 椋庨櫓绠＄悊閰嶇疆
-    MAX_SLIPPAGE = 5.0  # 鏈澶ф粦鐐 5%
-    MIN_LIQUIDITY = 10000  # 鏈灏忔祦鍔ㄦ $10,000
-    MAX_TRADE_AMOUNT = 10000  # 鍗曠瑪鏈澶т氦鏄撻噾棰 $10,000
+    # 风险管理配置
+    MAX_SLIPPAGE = 5.0  # 最大滑点 5%
+    MIN_LIQUIDITY = 10000  # 最小流动性 $10,000
+    MAX_TRADE_AMOUNT = 10000  # 单笔最大交易金额 $10,000
     
-    # 浜ゆ槗閰嶇疆
-    TRANSACTION_TIMEOUT = 300  # 浜ゆ槗瓒呮椂鏃堕棿锛堢掞級
-    CONFIRMATION_BLOCKS = 2  # 纭璁ゅ尯鍧楁暟
+    # 交易配置
+    TRANSACTION_TIMEOUT = 300  # 交易超时时间（秒）
+    CONFIRMATION_BLOCKS = 2  # 确认区块数
     
-    # 鏃ュ織閰嶇疆
+    # 日志配置
     LOG_LEVEL = 'INFO'
     LOG_FILE = 'trading_agent.log'
     
-    # 缂撳瓨閰嶇疆
+    # 缓存配置
     CACHE_ENABLED = True
-    CACHE_TTL = 60  # 缂撳瓨杩囨湡鏃堕棿锛堢掞級
+    CACHE_TTL = 60  # 缓存过期时间（秒）
     
     @classmethod
     def validate_config(cls):
-        """楠岃瘉閰嶇疆"""
+        """验证配置"""
         if not cls.OKX_API_KEY:
-            raise ValueError('OKX_API_KEY 鏈璁剧疆')
+            raise ValueError('OKX_API_KEY 未设置')
         if not cls.OKX_API_SECRET:
-            raise ValueError('OKX_API_SECRET 鏈璁剧疆')
+            raise ValueError('OKX_API_SECRET 未设置')
         if not cls.OKX_API_PASSPHRASE:
-            raise ValueError('OKX_API_PASSPHRASE 鏈璁剧疆')
+            raise ValueError('OKX_API_PASSPHRASE 未设置')
         return True
     
     @classmethod
     def get_chain_config(cls, chain):
-        """鑾峰彇鐗瑰畾閾剧殑閰嶇疆"""
+        """获取特定链的配置"""
         chain_configs = {
             'ethereum': {
                 'chain_id': 1,
@@ -116,5 +119,5 @@ class Config:
         }
         return chain_configs.get(chain.lower(), {})
 
-# 鍒涘缓閰嶇疆瀹炰緥
+# 创建配置实例
 config = Config()
